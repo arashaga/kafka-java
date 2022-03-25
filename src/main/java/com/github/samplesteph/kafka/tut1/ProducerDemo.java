@@ -43,8 +43,11 @@ public class ProducerDemo {
         //create a recond for producer
         for(int i =0 ;i <5; i++){
             String val = "Message " + i;
-            String key = "id_"+i;
-        ProducerRecord<String, String> record = new ProducerRecord<>("first_topic" ,val);
+
+            // you use they to make sure same keys go to the same parition
+            // for exmaple they key could be the truck id or something like that
+            String key = "id_"+i; 
+        ProducerRecord<String, String> record = new ProducerRecord<>("test_topic" ,key,val);
         // send data
        
         producer.send(record, new Callback(){
